@@ -3,18 +3,17 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { Review } from "../api/interfaces";
 import {
   FetchStatuses,
+  FilterFields,
   FilterState,
-  FilterValues,
-  SortState,
-  SortTypes,
+  FilterTypes,
 } from "./interfaces";
-import { parseSort } from "../helpers/parseSort";
+import { getSortedReviews } from "../helpers/getSortedReviews";
 
 export interface RewiewsState {
   initialReviews: Review[];
   reviews: Review[];
   sort: string | null;
-  filters: Record<string, FilterValues>;
+  filters: Record<string, FilterState>;
   fetchStatus: FetchStatuses | null;
 }
 
@@ -43,23 +42,33 @@ export const reviewsSlice = createSlice({
     },
     sort: (state, { payload }: PayloadAction<string | null>) => {
       state.sort = payload;
-      const sort = parseSort(payload);
-      if (!sort) {
-        state.reviews = state.reviews.sort((a, b) => a.id - b.id);
+      state.reviews = getSortedReviews(payload, state.reviews);
+    },
+    filter: (state, { payload }: PayloadAction<FilterState>) => {
+      if (payload.value.length === 0) {
+        delete state.filters[payload.field];
       } else {
-        state.reviews.sort((a, b) => {
-          if (sort.type === SortTypes.Asc) {
-            return a[sort.field] < b[sort.field] ? -1 : a[sort.field] === b[sort.field] ? 0 : 1;
+        state.filters[payload.field] = payload;
+      }
+      state.reviews = state.initialReviews;
+
+      for (const [field, filterState] of Object.entries(state.filters)) {
+        state.reviews = state.reviews.filter((item) => {
+          if (filterState.type === FilterTypes.Array) {
+            return filterState.value.includes(item[field as FilterFields]);
           }
-          return b[sort.field] < a[sort.field]
-            ? -1
-            : a[sort.field] === b[sort.field]
-            ? 0
-            : 1;
+          if (filterState.type === FilterTypes.Range) {
+            return (
+              item[field as FilterFields] >= filterState.value[0] &&
+              item[field as FilterFields] <= filterState.value[1]
+            );
+          }
+          return true;
         });
       }
+
+      state.reviews = getSortedReviews(state.sort, state.reviews);
     },
-    filter: (state, {}: PayloadAction<FilterState>) => {},
   },
 });
 

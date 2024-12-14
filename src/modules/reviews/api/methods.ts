@@ -16,7 +16,7 @@ export const getReviews = async (): Promise<Review[]> => {
       platform: "Яндекс",
       rating: 3,
       date: "2023-08-14T09:00:00Z",
-      text: "Хорошо, но есть недочеты.",
+      text: "Ок, но можно лучше",
     },
     {
       id: 3,
@@ -51,7 +51,7 @@ export const getReviews = async (): Promise<Review[]> => {
       platform: "Google",
       rating: 4,
       date: "2023-11-15T10:00:00Z",
-      text: "Отличный сервис!",
+      text: "Супер))",
     },
     {
       id: 8,

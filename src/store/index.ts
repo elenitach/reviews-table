@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reviewsReducer from '../modules/reviews/store/reviewsSlice'
+import reviewsReducer from "../modules/reviews/store/reviewsSlice";
 import createSagaMiddleware from "redux-saga";
 import reviewsSaga from "../modules/reviews/store/reviewsSaga";
 

@@ -9,8 +9,8 @@ export enum FilterFields {
 }
 
 export enum SortTypes {
-    Asc = 'asc',
-    Desc = 'desc',
+  Asc = "asc",
+  Desc = "desc",
 }
 
 export interface SortState {
@@ -18,20 +18,26 @@ export interface SortState {
   type: SortTypes;
 }
 
-export type FilterValues = Array<number | string> | [number, number];
+export type FilterValues = Array<number | string>;
+
+export enum FilterTypes {
+  Array = "array",
+  Range = "range",
+}
 
 export interface FilterState {
   field: FilterFields;
   value: FilterValues;
+  type: FilterTypes;
 }
 
 export interface SortOption {
-    value: string,
-    label: string
+  value: string;
+  label: string;
 }
 
 export enum FetchStatuses {
-  Pending = 'pending',
-  Success = 'success',
-  Error = 'error'
+  Pending = "pending",
+  Success = "success",
+  Error = "error",
 }

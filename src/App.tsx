@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import "./App.css";
 import { Sidebar } from "./modules/reviews/components/Sidebar/Sidebar";
 import { ReviewsTable } from "./modules/reviews/components/ReviewsTable/ReviewsTable";
 import Typography from "@mui/material/Typography";
@@ -15,11 +14,11 @@ function App() {
   }, []);
 
   return (
-    <Box component="main" p={4}>
+    <Box component="main" p={6}>
       <Typography component="h1" variant="h5" mb={3}>
         Отзывы о нас
       </Typography>
-      <Box sx={{ display: "flex", gap: 6 }}>
+      <Box sx={{ display: "flex", gap: 10 }}>
         <Sidebar />
         <ReviewsTable />
       </Box>

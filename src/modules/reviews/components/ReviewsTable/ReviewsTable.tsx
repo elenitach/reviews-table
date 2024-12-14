@@ -1,5 +1,5 @@
-import { FC, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC } from "react";
+import { useSelector } from "react-redux";
 import type { RootState } from "../../../../store";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
@@ -7,7 +7,6 @@ import TableBody from "@mui/material/TableBody";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import CircularProgress from "@mui/material/CircularProgress";
-import { fetchReviews } from "../../store/reviewsSlice";
 import { FetchStatuses } from "../../store/interfaces";
 import React from "react";
 import { format } from "date-fns";
